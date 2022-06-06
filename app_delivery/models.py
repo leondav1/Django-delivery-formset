@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Delivery(models.Model):
-    title = models.CharField(verbose_name='Название', max_length=100)
+    title = models.CharField(verbose_name='Название товара', max_length=100)
     product_type = models.CharField(verbose_name='Тип товара', max_length=100)
     delivery_date = models.DateField(verbose_name='Дата доставки')
     created_at = models.DateTimeField(verbose_name='дата создания', auto_now_add=True)
@@ -15,7 +15,7 @@ class Delivery(models.Model):
 
 
 class Address(models.Model):
-    addr = models.CharField(verbose_name='Адрес доставки', max_length=100)
+    addr = models.CharField(verbose_name='Адрес пункта выдачи', max_length=100)
     delivery = models.ForeignKey(
         'Delivery',
         verbose_name='Доставка',
