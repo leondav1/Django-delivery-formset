@@ -1,0 +1,23 @@
+{% extends 'delivery/base_delivery.html' %}
+
+{% block title %}
+    {{ delivery.title }} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">
+        {{ delivery.title }}
+    </h1>
+    <p>
+        {{ delivery.product_typebody }}
+    </p>
+    <p>
+        {{ delivery.delivery_date }}
+    </p>
+    <div class="row">
+    {% for file in files %}
+        <img src="{{ MEDIA_URL }}{{ file.file.url }}" class="rounded float-start" alt="...">
+    {% endfor %}
+
+    </div>
+{% endblock %}

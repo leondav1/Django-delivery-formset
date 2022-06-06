@@ -1,0 +1,12 @@
+{% extends 'delivery/base_delivery.html' %}
+
+{% block title %}
+    Список доставок - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="md-5">Deliveries:</h1>
+    {% for delivery in deliveries %}
+        {% include 'delivery/includes/delivery_card_template.html' %}
+    {% endfor %}
+{% endblock %}
