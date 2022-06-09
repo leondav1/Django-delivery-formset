@@ -1,12 +1,29 @@
-{% extends 'delivery/base_delivery.html' %}
+{% extends 'base.html' %}
 
-{% block title %}
-    Список доставок - {{ block.super }}
-{% endblock %}
-
+{% block title %}Список заказов - {{ block.super }}{% endblock %}
+{% block header %}{% endblock %}
 {% block content %}
-    <h1 class="md-5">Deliveries:</h1>
-    {% for delivery in deliveries %}
-        {% include 'delivery/includes/delivery_card_template.html' %}
-    {% endfor %}
+  <div class="container">
+    <h1>Список заказов</h1>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Товар</th>
+        <th scope="col">Тип</th>
+        <th scope="col">Дата доставки</th>
+        <th scope="col">Адреса</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for delivery in deliveries %}
+        <tr>
+          <th scope="row"><a>{{ delivery.title }}</a></th>
+          <td>{{ delivery.product_type }}</td>
+          <td>{{ delivery.delivery_date|date:"d M Y" }}</td>
+          <td>{% for address in delivery.addresses.all %}{{ address.addr }}<br>{% endfor %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

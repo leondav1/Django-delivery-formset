@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView
 
@@ -10,13 +10,6 @@ class DeliveryListView(ListView):
     model = Delivery
     template_name = 'delivery/delivery_list.html'
     context_object_name = 'deliveries'
-
-
-class DeliveryDetail(View):
-    def get(self, request, pk):
-        delivery = get_object_or_404(Delivery, pk=pk)
-        files = File.objects.filter(delivery=delivery)
-        return render(request, 'delivery/delivery_detail.html', context={'delivery': delivery, 'files': files})
 
 
 class DeliveryCreate(View):

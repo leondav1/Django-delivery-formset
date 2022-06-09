@@ -1,36 +1,19 @@
-{% extends 'delivery/base_delivery.html' %}
+{% extends 'base.html' %}
 
-{% block title %}
-    Delivery Create
-{% endblock %}
+{% block title %}Добавление заказа - {{ block.super }}{% endblock %}
+{% load bootstrap5 %}
 
 {% block content %}
-    <h2>Страница создания доставки</h2>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-6 offset-md-4">
-                <form action="{% url 'delivery_create_url' %}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ formset.management_form }}
-                    {% for field in form %}
-                        <div class="form-group">
-                            {% if field.errors %}
-                                <div class="alert alert-danger">
-                                    {{ field.errors }}
-                                </div>
-                            {% endif %}
-                            {% if not field.is_hidden %}
-                                {{ field.label }}
-                            {% endif %}
-                            {{ field }}
-                        </div>
-                    {% endfor %}
-                    {% for field in formset %}
-                        <p>{{ field }}</p>
-                    {% endfor %}
-                     <button type="submit" class="btn btn-primary mt-3">Создать</button>
-                </form>
-            </div>
-        </div>
-    </div>
+  {% block one %}
+    <h1>Добавление заказа</h1>
+  {% endblock one %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+  {% for field in form %}
+    {% bootstrap_field field layout='horizontal' %}
+  {% endfor %}
+    {% bootstrap_formset formset layout='horizontal' %}
+
+    {% buttons submit='Добавить' %}{% endbuttons %}
+  </form>
 {% endblock %}

@@ -2,13 +2,18 @@ from django.db import models
 
 
 class Delivery(models.Model):
+    ACTIVE_CHOICES = [
+        ('notebooks', 'Ноутбуки'),
+        ('phones', 'Телефоны'),
+        ('accessories', 'Комплектующие'),
+    ]
     title = models.CharField(verbose_name='Название товара', max_length=100)
-    product_type = models.CharField(verbose_name='Тип товара', max_length=100)
+    product_type = models.CharField(verbose_name='Тип товара', max_length=100, choices=ACTIVE_CHOICES)
     delivery_date = models.DateField(verbose_name='Дата доставки')
     created_at = models.DateTimeField(verbose_name='дата создания', auto_now_add=True)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['delivery_date']
 
     def __str__(self):
         return self.title
@@ -23,7 +28,7 @@ class Address(models.Model):
         null=True,
         blank=True,
         on_delete=models.CASCADE,
-        related_name='address'
+        related_name='addresses'
     )
 
     def __str__(self):
